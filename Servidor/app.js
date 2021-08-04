@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const itemsRoutes = require('./api/routes/items');
+
 app.use(express.json());
 //application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -13,9 +15,7 @@ app.use((req, res, next) => {
     next();
 }); 
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.use('/', itemsRoutes); 
 
 app.listen(3080, function () {
   console.log('Example app listening on port 3080!');
