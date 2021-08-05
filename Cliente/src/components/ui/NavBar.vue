@@ -5,7 +5,7 @@
         <img class="nav-logo"/>
       </a> 
       <div class="input-group">        
-        <input type="text" class="form-control" v-model="textoBuscar" placeholder="Nunca dejes de buscar" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" @keyup.enter="buscar()" v-model="textoBuscar" placeholder="Nunca dejes de buscar" aria-describedby="basic-addon1">
         <button type="button" class="input-group-text" id="basic-addon1" @click="buscar()">
           <img class="btn-search" />
         </button>
@@ -24,6 +24,7 @@ export default {
     },
     methods:{
       buscar(){ 
+        this.$router.push("/");
         this.$router.push({ path: 'items', query: { search: this.textoBuscar } });
       }
     }
