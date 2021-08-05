@@ -25,6 +25,9 @@ body,
 .marginBottom32{
     margin-bottom: 32px;
 }
+.bgFondo{
+    color: $terciario;
+}
 
 .breadcrumb{
     .breadcrumb-item{ 
@@ -96,21 +99,25 @@ body,
 //Componente donde listamos producto de busqueda
 .listado{
     width: 100%; 
-    background-color: $blanco;
+    background-color: $blanco; 
 }
 
 // Mini Card para listado de producto
 .minicard{
     width: 100%;
+    margin: 16px;
+    cursor: pointer;
     .imgMini{   
+        max-width: 180px;
         img{
-            margin: 16px;
-            width: 180px;
-            height: auto;
+            width: auto;
+            height: 180px;
             border-radius: 4px;
         }
     }    
     .detalleMini{
+        padding-top: 32px;
+        color: $primario;
         p{
             font-size: 12px;
             color: $terciario;
@@ -118,16 +125,15 @@ body,
         }
         h2{ 
             font-size: 24px;
-            color: $primario;
             img{
                 padding-left: 5px;
             }
         }
         h3{
-            margin-top: 32px;
+            margin-top: 16px;
             font-size: 18px;
-            color: $secundario;
         }
     }
 }
+ 
 @import "../../node_modules/bootstrap/scss/bootstrap";

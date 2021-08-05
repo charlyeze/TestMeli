@@ -1,7 +1,7 @@
 <template>
   <nav class="navbarML">
     <div class="container d-flex align-items-center">
-      <a href="//www.mercadolibre.com.ar">
+      <a href="/">
         <img class="nav-logo"/>
       </a> 
       <div class="input-group">        
@@ -23,9 +23,8 @@ export default {
       }
     },
     methods:{
-      buscar(){
-        let url = '/items?search=' + this.textoBuscar;
-        this.$router.push(url);
+      buscar(){ 
+        this.$router.push({ path: 'items', query: { search: this.textoBuscar } });
       }
     }
 

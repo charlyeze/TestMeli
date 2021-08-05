@@ -22,6 +22,10 @@ body,
   margin-bottom: 32px;
 }
 
+.bgFondo {
+  color: #999999;
+}
+
 .breadcrumb .breadcrumb-item {
   font-size: 14px;
   color: #999999;
@@ -106,13 +110,23 @@ body,
 
 .minicard {
   width: 100%;
+  margin: 16px;
+  cursor: pointer;
+}
+
+.minicard .imgMini {
+  max-width: 180px;
 }
 
 .minicard .imgMini img {
-  margin: 16px;
-  width: 180px;
-  height: auto;
+  width: auto;
+  height: 180px;
   border-radius: 4px;
+}
+
+.minicard .detalleMini {
+  padding-top: 32px;
+  color: #333333;
 }
 
 .minicard .detalleMini p {
@@ -123,7 +137,6 @@ body,
 
 .minicard .detalleMini h2, .minicard .detalleMini .h2 {
   font-size: 24px;
-  color: #333333;
 }
 
 .minicard .detalleMini h2 img, .minicard .detalleMini .h2 img {
@@ -131,9 +144,8 @@ body,
 }
 
 .minicard .detalleMini h3, .minicard .detalleMini .h3 {
-  margin-top: 32px;
+  margin-top: 16px;
   font-size: 18px;
-  color: #666666;
 }
 
 /*!
