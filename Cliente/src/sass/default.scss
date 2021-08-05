@@ -61,13 +61,16 @@ body,
 .detalle{
     width: 100%; 
     background-color: $blanco;
+    padding-top: 32px;
     .imgDetalle{
+        width: 65%;
         min-width: 680px; 
-        width: 70%;
+        height: auto; 
         margin: 0 auto;
+        padding-bottom: 32px;
     }
     .tituloDetalle{
-        width: 30%;
+        width: 35%;
         h2{
             font-size: 24px;
             font-weight: bold;
@@ -79,18 +82,24 @@ body,
         }
         h1{
             font-size: 46px;
-            color: $primario; 
+            color: $primario;  
+            small{ 
+                margin-left: -10px;
+                font-size: 23px;
+                position: relative;
+                bottom: 16px; 
+            }
         }  
     }
     .desDetalle{
-        width: 70%;
+        width: 65%;
         margin-left: 32px;
         h1{
             font-size: 28px;
             color: $primario;
         }
         p{
-            color: $fondo;
+            color: $terciario;
             font-size:16px;
         }
     }

@@ -60,16 +60,19 @@ body,
 .detalle {
   width: 100%;
   background-color: #fff;
+  padding-top: 32px;
 }
 
 .detalle .imgDetalle {
+  width: 65%;
   min-width: 680px;
-  width: 70%;
+  height: auto;
   margin: 0 auto;
+  padding-bottom: 32px;
 }
 
 .detalle .tituloDetalle {
-  width: 30%;
+  width: 35%;
 }
 
 .detalle .tituloDetalle h2, .detalle .tituloDetalle .h2 {
@@ -88,8 +91,15 @@ body,
   color: #333333;
 }
 
+.detalle .tituloDetalle h1 small, .detalle .tituloDetalle .h1 small, .detalle .tituloDetalle h1 .small, .detalle .tituloDetalle .h1 .small {
+  margin-left: -10px;
+  font-size: 23px;
+  position: relative;
+  bottom: 16px;
+}
+
 .detalle .desDetalle {
-  width: 70%;
+  width: 65%;
   margin-left: 32px;
 }
 
@@ -99,7 +109,7 @@ body,
 }
 
 .detalle .desDetalle p {
-  color: #eeeeee;
+  color: #999999;
   font-size: 16px;
 }
 
