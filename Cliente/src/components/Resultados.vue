@@ -17,8 +17,8 @@
 export default {
     name: 'Resultados',
     mounted(){ 
-        this.query = this.$route.query;
-        this.loadQuery();
+        this.loadData();
+        this.$watch(() => {return this.$route.query;}, () => { this.loadData(); }); 
     },
     data(){
         return{
@@ -28,13 +28,23 @@ export default {
         }
     },
     methods:{
-        async loadQuery(){
+        loadData(){
+            this.cleanUp();
+            this.query = this.$route.query;
+            this.loadQuery();
+        },
+        async loadQuery(){ 
             let query = this.query.search; 
             let res = await this.$api.get_items({params:{query,limit:4}});
             if( res.data ){
                 this.objects = res.data.items; 
                 this.isData = true;
             }
+        },
+        cleanUp(){
+            this.query = {};
+            this.objects = [];
+            this.isData = false;
         }
     }
 }

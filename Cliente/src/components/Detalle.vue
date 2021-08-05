@@ -4,15 +4,19 @@
     
     <Breadcrumb />
 
-    <div class="container detalle marginTop16 " v-if="isData">
-          <div class="d-flex bd-highlight">
+    <div class="container detalle marginTop16" v-if="isData">
+          <div class="d-flex bd-highlight ">
             <div class="imgDetalle bd-highlight d-flex justify-content-center">
                 <img :src="this.item.picture" />
             </div>
             <div class="tituloDetalle marginTop32 bd-highlight">
-                <p>{{ capitalizarPrimeraLetra(this.item.condition) }} - {{ this.item.sold_quantity }} vendidos</p>
-                <h2 class="marginTop16">{{ this.item.title }}</h2>
-                <h1 class="marginTop32">
+                <p>
+                  {{ capitalizarPrimeraLetra(this.item.condition) }} - {{ this.item.sold_quantity }} vendidos
+                </p>
+                <h2>
+                  {{ this.item.title }}
+                </h2>
+                <h1>
                   {{ formatPrice(this.item.price) }}
                   <small>{{ this.item.decimals || '00' }}</small>
                 </h1>
@@ -21,13 +25,14 @@
                 </div>
             </div>
           </div> 
-          <div class="desDetalle">
+          <div class="desDetalle ">
               <h1 class="marginBottom32">Descripción del producto</h1>
-              <p class="marginBottom32">
+              <p>
                  {{ this.item.description }}
               </p>
           </div>
-      </div>    
+      </div>   
+        
   </div>
 </template>
 
