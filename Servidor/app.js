@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     next();
 }); 
 
-app.use('/', itemsRoutes); 
+app.use('/items', itemsRoutes); 
 
 app.listen(3080, function () {
   console.log('Example app listening on port 3080!');

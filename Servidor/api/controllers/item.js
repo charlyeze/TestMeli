@@ -1,61 +1,114 @@
+const axios = require('axios');
 
-exports.traer_todos = (req, res, next) => {
-    var find = {};
+exports.traer_todos = (req, res, next) => { 
+    let query = req.query.query || 'test';
+    let limit = req.query.limit || 4;
+    let url = "https://api.mercadolibre.com/sites/MLA/search?q=" + query;
+     
+    axios.get(url)
+      .then((response) => {  
+          let result = parseResultItems(response.data, limit); 
+          return res.send(result);    
+      })
+      .catch((error) => {
+          return res.status(400).json(error);
+      });
+};
+
+exports.objeto_get_id = async (req, res, next) => {
+  try{
+    let id = req.query.id; 
+    let url = "https://api.mercadolibre.com/items/" + id; 
+    let response = await axios.get(url); 
+
+    let urlDes = "https://api.mercadolibre.com/items/" + id + "/description";
+    let responseDes = await axios.get(urlDes); 
+
+    let result = parseResultItemId(response.data, responseDes.data);  
+    return res.send(result); 
+
+  }catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+ 
+function parseResultItems(data, limit) {
+  let result = {};
+  let categoriesValues = data.available_filters[0].values;
+  let categories = categoriesValues.map(value => {return value.name});
   
-    if (req.query.find) {
-     find = JSON.parse(req.query.find);
-    }
+  let author = {  
+      name: "",
+      lastname: "" 
+  }
+
+  let items = [];
+  let itemsResult = data.results;
   
-    if (req.query.sort) {
-      var sortOrder = JSON.parse(req.query.sort);
-    }
-  
-    const options = {
-      page: req.query.page || 1,
-      limit: req.query.limit || 10,
-      select: req.query.select || '',
-      sort: sortOrder,
-      populate: req.query.populate,
-      pagination: req.query.pagination !== 'false'
+  for (let i = 0; i < limit; i++) {
+    var item = itemsResult[i]; 
+    let price = item.price;
+    let decimals = getDecimals(price);
+
+    let object = {
+      id: item.id,
+      title: item.title,
+      price:{
+        currency: item.currency_id,
+        amount: Math.trunc(price),
+        decimals
+      },
+      picture: item.thumbnail,
+      condition: item.condition,
+      free_shipping: item.shipping.free_shipping
     };
+
+    items.push(object);
+  }
   
-    const Model = req.Model; 
+  result = {...{author},...{categories},...{items}};
+  return result;
     
-    Model.paginate(find, options )
-    .then(response => {
-        return res.status(200).json(response);
-    })
-    .catch(error => {
-        return res.status(400).json(error);
-    });
+}
+
+ 
+function parseResultItemId(data, descriptionResult){ 
+  let result = {};
+  let price = data.price;
+  let decimals = getDecimals(price);
+  let picture = data.pictures[0];
+  let description = descriptionResult.plain_text || '';
+
+  let author = {  
+    name: "",
+    lastname: "" 
+  }   
+
+  let item = {
+    id: data.id,
+    title: data.title,
+    price:{
+      currency: data.currency_id,
+      amount: Math.trunc(price),
+      decimals
+    },
+    picture: picture.url,
+    condition: data.condition,
+    free_shipping: data.shipping.free_shipping,
+    sold_quantity: data.sold_quantity,
+    description
   };
-  
-  exports.objeto_get_id = (req, res, next) => {
-  
-    const objetoId = req.params.objetoId;
-    const Model = req.Model;
-    const getConsulta = Model.findById( objetoId );
-  
-    if (req.query.select) {
-      getConsulta.select(req.query.select);
-    }
-  
-    if (req.query.populate) {
-      getConsulta.populate(req.query.populate);
-    }
-  
-    getConsulta.exec( (err, objeto) => {
-  
-      if (err) {
-        return res.status(404).json({ error: err });
-      }
-  
-      if (objeto) {
-        return res.status(200).send(objeto);
-      }
-      else {
-        return res.status(404).json({ error: "No puedo encontrar el objeto" });
-      }
-    });
-  };
-  
+
+  result = {...{author},...{item}};
+  return result;
+    
+}
+
+function getDecimals(n){
+  var nstring = (n + ""),
+    nindex  = nstring.indexOf("."),
+    decimals  = Number.parseInt((nindex > -1 ? nstring.substring(nindex + 1) : 00)); 
+
+  return decimals;
+}
