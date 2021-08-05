@@ -4,6 +4,7 @@
 ```
 npm install
 ``` 
+### Run Servidor
 npm start
 
 ## Project Cliente setup
