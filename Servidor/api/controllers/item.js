@@ -61,7 +61,8 @@ function parseResultItems(data, limit) {
       },
       picture: item.thumbnail,
       condition: item.condition,
-      free_shipping: item.shipping.free_shipping
+      free_shipping: item.shipping.free_shipping,
+      state: item.seller_address.state.name
     };
 
     items.push(object);
