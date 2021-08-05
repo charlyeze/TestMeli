@@ -2,7 +2,7 @@
     <div class="minicard" @click="detalleItem()">
         <div class="row " v-if="isLoaded">
             <div class="col-xl-3 imgMini d-flex justify-content-center">
-                <img :src="this.item.picture" />
+                <img :src="this.item.picture" class="img-fluid" />
             </div>
             <div class="col-xl-9 detalleMini">
                 <div class="d-flex bd-highlight">
